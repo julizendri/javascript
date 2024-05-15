@@ -1,29 +1,38 @@
-let nombre = prompt("Por favor ingrese su nombre.");
-let apellido = prompt("Por favor ingrese su apellido.");
+let nombre1 = prompt("Por favor ingrese su nombre.");
 const VACIO = " ";
-alert("¡Bienvenida/o " + nombre + VACIO + apellido + "! ¿Está listo para su próxima aventura?");
+const PUNTO = ".";
+alert("¡Bienvenida/o " + nombre1 + "! Por favor siga las instrucciones.");
 
 alert("Nuestro trabajo es ayudarle a facilitar el proceso para aplicar a las visas, permisos y autorizaciones de viaje para que usted pueda focalizarse en lo que de verdad importa. Por el momento contamos con servicios para permisos de viaje de los siguientes países: Estados Unidos, Australia, Canadá.");
 
+let cantidadDeTramites = parseInt(prompt("¿Cuántas personas quieren realizar el trámite? (Ingrese la cantidad en números)."))
 
-function despedida(){
-    alert ("No podemos ayudarle, hasta luego!")
+for (let i = 1; i <= cantidadDeTramites; i++) {
+    let primerNombre = prompt("Ingrese el primer nombre de la persona " + i + PUNTO);
+    let primerApellido = prompt("Ingrese el primer apellido de la persona " + i + PUNTO);
+    let telefono = prompt("Ingrese el número de teléfono de la persona " + i + PUNTO);
+    let email = prompt("Ingrese la dirección de correo electrónico de la persona " + i + PUNTO);
+    console.log("Persona " + i + ":" + primerNombre + VACIO + primerApellido + VACIO + telefono + VACIO + email);
+}
+
+function despedida() {
+    alert("No podemos ayudarle, hasta luego!");
 }
 
 function elegirPais() {
-    let pais = prompt("¿A qué país desea viajar? (si desea seleccionar otro país ingrese otro).");
-    if ((pais = "Estados Unidos") || (pais = "estados unidos") || (pais = "Estado Unidos") || (pais = "Estado Unido") || (pais = "Estados Unido") || (pais = "estado unidos") || (pais = "estados unido") || (pais = "EEUU") || (pais = "eeuu") || (pais = "eu")) {
+    let pais = prompt("¿A qué país desea viajar? (si desea seleccionar otro país ingrese otro).").toLowerCase();
+    if ((pais === "estados unidos") || (pais === "estado unidos") || (pais === "estado unido") || (pais === "estados unido") || (pais === "eeuu") || (pais === "eu")) {
         alert("Usted quiere viajar a Estados Unidos.");
-    } else if ((pais = "Australia") || (pais = "australia") || (pais = "australi") || (pais = "Australi") || (pais = "Au") || (pais = "au") || (pais = "AU")) {
+    } else if ((pais === "australia") || (pais === "australi") || (pais === "au")) {
         alert("Usted quiere viajar a Australia.");
-    } else if ((pais = "Canada") || (pais = "canada") || (pais = "Canadá") || (pais = "canadá") || (pais = "Ca") || (pais = "CA") || (pais = "ca")) {
-        alert("Usted quiere viajar a Australia.")
-    } else if ((pais = "otro") || (pais = "OTRO") || (pais = "Otro") || (pais = "otr")) {
+    } else if ((pais === "canada") || (pais === "canadá") | (pais === "ca")) {
+        alert("Usted quiere viajar a Canadá.")
+    } else if ((pais === "otro") || (pais === "otr")) {
         alert("Usted ha ingresado otro.");
     } else {
         alert("La opción ingresada no está en nuestra base de datos, por favor ingrese Estados Unidos, Australia, Canadá u otro.");
-        let nuevaOpcion = prompt("Desea ingresar una nueva opción? (si o no)");
-        if ((nuevaOpcion = si) || (nuevaOpcion = Si) || (nuevaOpcion = SI) || (nuevaOpcion = s) || (nuevaOpcion = S) || (nuevaOpcion = i) || (nuevaOpcion = I)) {
+        let nuevaOpcion = prompt("Desea ingresar una nueva opción? (si o no)").toLowerCase();
+        if ((nuevaOpcion === "si") || (nuevaOpcion === "s") || (nuevaOpcion === "i")) {
             elegirPais();
         } else {
             despedida();
@@ -33,14 +42,27 @@ function elegirPais() {
 
 elegirPais()
 
-let edad = prompt("Ingrese su edad.")
-if (edad >=18){
-    alert ("Usted es mayor de edad. Pronto le enviaremos un email, gracias");
-}else if ((edad >0) || (edad <18)) {
-    let opcionEdad = prompt ("Usted es emnor de edad, cuenta con un adulto rezponsable para continuar con el trámite?");
-    if ((opcionEdad = si) || (opcionEdad = Si) || (opcionEdad = SI) || (opcionEdad = s) || (opcionEdad = S) || (opcionEdad = i) || (opcionEdad = I)) {
-        alert ("Pronto le enviaremos un email, gracias.");
+function edad() {
+    let edad = parseInt(prompt("Ingrese su edad."));
+    if (edad >= 18) {
+        alert("Usted es mayor de edad. Pronto le enviaremos un email, gracias");
+    } else if (edad > 0 && edad < 18) {
+        let opcionEdad = prompt("Usted es menor de edad, cuenta con un adulto responsable para continuar con el trámite?").toLowerCase();
+        if ((opcionEdad === "si") || (opcionEdad === "s") || (opcionEdad === "i")) {
+            alert("Pronto le enviaremos un email, gracias.");
+        } else {
+            despedida();
+        }
     } else {
-        despedida();
+        alert("El número ingresado no es válido.");
+        let nuevaOpcion = prompt("Desea ingresar una nueva opción? (si o no)").toLowerCase();
+        if ((nuevaOpcion === "si") || (nuevaOpcion === "s") || (nuevaOpcion === "i")) {
+            edad();
+        } else {
+            despedida();
+        }
+
     }
 }
+
+edad()
