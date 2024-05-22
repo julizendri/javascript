@@ -7,7 +7,7 @@ alert("Nuestro trabajo es ayudarle a facilitar el proceso para aplicar a las vis
 
 let cantidadDeTramites = parseInt(prompt("¿Cuántas personas quieren realizar el trámite? (Ingrese la cantidad en números)."));
 
-while (isNaN(cantidadDeTramites) || cantidadDeTramites <= 0) {
+while (isNaN(cantidadDeTramites) || cantidadDeTramites < 0) {
     cantidadDeTramites = parseInt(prompt("Respuesta inválida: ¿Cuántas personas quieren realizar el trámite? (Ingrese la cantidad en números)."));
 }
 
