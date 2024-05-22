@@ -11,7 +11,15 @@ while (isNaN(cantidadDeTramites)) {
     cantidadDeTramites = parseInt(prompt("Respuesta inválida: ¿Cuántas personas quieren realizar el trámite? (Ingrese la cantidad en números)."))
 }
 
+function despedida() {
+    alert("Hasta luego!");
+}
+
 for (let i = 1; i <= cantidadDeTramites; i++) {
+    if (i === 0){
+        despedida();
+        break;
+    }
     class Persona {
         constructor(primerNombre, primerApellido, telefono, email) {
             this.primerNombre = primerNombre;
@@ -26,25 +34,19 @@ for (let i = 1; i <= cantidadDeTramites; i++) {
     const datos = new Persona(prompt("Ingrese el primer nombre de la persona " + i + PUNTO), prompt("Ingrese el primer apellido de la persona " + i + PUNTO), prompt("Ingrese el número de teléfono de la persona " + i + PUNTO), prompt("Ingrese su dirección de correo electrónico de la persona " + i + PUNTO));
     datos.recolectaDatos();
 
-
-    function despedida() {
-        alert("Hasta luego!");
-    }
-
-
     function edad() {
-        let edad = parseInt(prompt("Ingrese su edad en números."));
+        let edad = parseInt(prompt("Ingrese la edad de la persona " + i + " en números."));
         while (isNaN(edad)) {
-            edad = parseInt(prompt("Respuesta inválida: Ingrese su edad en números."))
+            edad = parseInt(prompt("Respuesta inválida: Ingrese la edad de la persona " + i + " en números."))
         }
         if (edad >= 18) {
-            alert("Usted es mayor de edad. Por favor, siga proporcionando los datos requeridos.");
+            alert("La persona " + i + "es mayor de edad. Por favor, siga proporcionando los datos requeridos.");
         } else if (edad > 0 && edad < 18) {
-            let opcionEdad = prompt("Usted es menor de edad, cuenta con un adulto responsable para continuar con el trámite? (si/no).").toLowerCase();
+            let opcionEdad = prompt("La persona " + i + ", cuenta con un adulto responsable para continuar con el trámite? (si/no).").toLowerCase();
             if ((opcionEdad === "si") || (opcionEdad === "s") || (opcionEdad === "i")) {
                 alert("Por favor, siga proporcionando los datos requeridos.");
             } else {
-                alert("Por favor, solicite la ayuda de un adulto para proporcionar los datos requeridos.");
+                alert("Por favor, solicite la ayuda de un adulto responsable de la persona " + i + " para proporcionar los datos requeridos.");
             }
         }
     }
@@ -54,13 +56,13 @@ for (let i = 1; i <= cantidadDeTramites; i++) {
 
 
     function elegirPais() {
-        let pais = prompt("¿A qué país desea viajar? (si desea seleccionar otro país ingrese otro).").toLowerCase();
+        let pais = prompt("¿A qué país desea viajar la persona " + i + "? (si desea seleccionar otro país ingrese otro).").toLowerCase();
         if ((pais === "estados unidos") || (pais === "estado unidos") || (pais === "estado unido") || (pais === "estados unido") || (pais === "eeuu") || (pais === "eu")) {
-            alert("Usted quiere viajar a Estados Unidos.");
+            alert("La persona " + i + " quiere viajar a Estados Unidos.");
         } else if ((pais === "australia") || (pais === "australi") || (pais === "au")) {
-            alert("Usted quiere viajar a Australia.");
+            alert("La persona " + i + "  quiere viajar a Australia.");
         } else if ((pais === "canada") || (pais === "canadá") | (pais === "ca")) {
-            alert("Usted quiere viajar a Canadá.")
+            alert("La persona " + i + "  quiere viajar a Canadá.")
         } else if ((pais === "otro") || (pais === "otr")) {
             alert("Usted ha ingresado otro.");
         } else {
