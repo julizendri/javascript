@@ -104,3 +104,22 @@ for (let i = 1; i <= cantidadDeTramites; i++) {
     persona.mostrarDatos(i);
     console.log(personas);
 }
+
+const navegador = document.getElementById('nav');
+navegador.style.backgroundColor = 'lightblue';
+navegador.className = 'navbar';
+
+const paginas = document.getElementById('paginas');
+paginas.className = 'paginas'; 
+
+const divIndex = document.getElementById('divIndex');
+divIndex.innerHTML = `<h3>Personas:</h3><div id="contenedorPersonas"></div><p>Gracias, pronto nos comunicaremos con usted para realizar su trámite.</p>`;
+const divPersonas = document.getElementById('contenedorPersonas');
+
+for (const persona of personas) {
+    let personaLiteral = `Nombre: ${persona.primerNombre}<br>Apellido: ${persona.primerApellido}<br>Teléfono: ${persona.telefono}<br>Email: ${persona.email}<br>Fecha de nacimiento: ${persona.fechaDeNacimiento.toDateString()}`;
+    const contenedorPersona = document.createElement('div');
+    contenedorPersona.innerHTML = personaLiteral;
+    divPersonas.appendChild(contenedorPersona);
+    contenedorPersona.className = 'personas';
+}
