@@ -85,16 +85,16 @@ for (let i = 1; i <= cantidadDeTramites; i++) {
     let telefono = prompt(`Ingrese el teléfono de la persona ${i}.`);
     let email = prompt(`Ingrese el correo electrónico de la persona ${i}.`);
 
-    let añoDeNacimiento = parseInt(prompt(`Ingrese el año de nacimiento de la persona ${i}.`));
+    let anioDeNacimiento = parseInt(prompt(`Ingrese el año de nacimiento de la persona ${i}.`));
     let mesDeNacimiento = parseInt(prompt(`Ingrese el mes de nacimiento de la persona ${i}.`)) - 1;
     let diaDeNacimiento = parseInt(prompt(`Ingrese el día de nacimiento de la persona ${i}.`));
     let fechaDeNacimiento = new Date(añoDeNacimiento, mesDeNacimiento, diaDeNacimiento);
 
     while (isNaN(fechaDeNacimiento.getTime())) {
-        añoDeNacimiento = parseInt(prompt(`Respuesta inválida: Ingrese el año de nacimiento de la persona ${i}.`));
+        anioDeNacimiento = parseInt(prompt(`Respuesta inválida: Ingrese el año de nacimiento de la persona ${i}.`));
         mesDeNacimiento = parseInt(prompt(`Ingrese el mes de nacimiento de la persona ${i}.`)) - 1;
         diaDeNacimiento = parseInt(prompt(`Ingrese el día de nacimiento de la persona ${i}.`));
-        fechaDeNacimiento = new Date(añoDeNacimiento, mesDeNacimiento, diaDeNacimiento);
+        fechaDeNacimiento = new Date(anioDeNacimiento, mesDeNacimiento, diaDeNacimiento);
     }
 
     let persona = new Persona(primerNombre, primerApellido, telefono, email, fechaDeNacimiento);
@@ -102,7 +102,6 @@ for (let i = 1; i <= cantidadDeTramites; i++) {
     persona.verificarEdad(i);
     persona.elegirPais(i);
     persona.mostrarDatos(i);
-    console.log(personas);
 }
 
 const navegador = document.getElementById('nav');
