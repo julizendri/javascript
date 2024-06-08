@@ -2,6 +2,21 @@
 const cuerpo = document.body;
 cuerpo.style.backgroundColor = '#e9eeff';
 
+// reset y letra
+
+const style = document.createElement('style');
+style.innerHTML = `
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-decoration: none;
+        box-sizing: border-box;
+        list-style: none;
+    }
+`;
+document.head.appendChild(style);
+
 // HEADER
 // declaracion de variables para el header
 
@@ -92,7 +107,7 @@ divFooter.appendChild(ulSocials);
 divFooter.appendChild(parrafoFooter);
 parrafoFooter.innerText = `Hago tu visa - ${anio} - Todos los derechos reservados.`;
 
-// for eahc para los socials
+// for each para los socials
 
 linksSocials.forEach(link => {
     const li = document.createElement('li');
@@ -107,11 +122,20 @@ linksSocials.forEach(link => {
 
 footer.style.width = '100%';
 footer.style.backgroundColor = '#041562';
+footer.style.display = 'flex';
+footer.style.flexDirection = 'column';
+footer.style.alignItems = 'center';
+footer.style.justifyContent = 'center';
+
+divFooter.style.width = '100%';
+divFooter.style.padding = '0 3%';
+divFooter.style.maxWidth = '70rem';
 divFooter.style.display = 'flex';
 divFooter.style.flexDirection = 'column';
-divFooter.style.alignContent = 'center';
+divFooter.style.alignItems = 'center';
+
 ulSocials.style.display = 'flex';
-ulSocials.style.alignSelf = 'center';
+ulSocials.style.justifycontent = 'center';
 ulSocials.style.gap = '0.5rem';
 parrafoFooter.style.textAlign = 'center';
 parrafoFooter.style.padding = '1rem';
