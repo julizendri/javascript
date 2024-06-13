@@ -42,25 +42,26 @@ ancla.appendChild(imgLogo);
 imgLogo.src = 'img/logoBlanco.png';
 imgLogo.alt = 'Hago tu visa';
 
-// utilizo metodo for each para los links
+// utilizo metodo for each para las pages
 
 links.forEach(link => {
     const li = document.createElement('li');
     li.innerHTML = `<a href="${link.toLowerCase()}.html">${link}</a>`;
     ulPages.appendChild(li);
 
-    li.style.padding = '.3rem';
+    li.style.padding = '.2rem';
     li.style.borderRadius = '3px';
+    li.style.textShadow = '0 0 3px black';
 
     // evento hover
 
     li.onmouseover = () => {
         li.style.transform = 'scale(1.1)';
-        li.style.backgroundColor = '#99bdc8';
+        li.style.textShadow = '0 0 3px #7692bf';
     }
     li.onmouseout = () => {
         li.style.transform = 'scale(1)';
-        li.style.backgroundColor = 'initial';
+        li.style.textShadow = 'initial';
     }
 })
 
@@ -78,7 +79,7 @@ ulLogo.appendChild(liLogo);
 imgLogo.style.width = '7.5rem';
 
 header.style.width = '100%';
-header.style.backgroundColor = '#0e3f79';
+header.style.backgroundColor = '#01194f';
 header.style.display = 'flex';
 header.style.justifyContent = 'center';
 
@@ -151,10 +152,12 @@ linksSocials.forEach(link => {
     img.style.width = '20px';
 })
 
-// duncion para que anden los links
+// funcion para convertir links en camelCase
 
-function toCamelCase(str) {
-    return str.toLowerCase().replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+function toCamelCase(string) {
+    string = string.replace(/[á]/g, 'a');
+
+    return string.toLowerCase().replace(/(?:\b\w|\s+)/g, function(match, index) {
         return index === 0 ? match.toLowerCase() : match.toUpperCase();
     }).replace(/\s+/g, '');
 }
@@ -169,7 +172,7 @@ function crearFooter(links, inicioLinks, visasLinks, contactoLinks) {
         divPagina.style.gridRow = '1 / span 3';
         divPagina.style.display = 'flex';
         divPagina.style.flexDirection = 'column';
-        divPagina.style.gap = '1.5rem';
+        divPagina.style.gap = '1rem';
 
         const paginaLink = document.createElement('a');
         paginaLink.href = `${pagina.toLowerCase()}.html`;
@@ -198,7 +201,7 @@ function crearFooter(links, inicioLinks, visasLinks, contactoLinks) {
 
         subMenu.style.display = 'flex';
         subMenu.style.flexDirection = 'column';
-        subMenu.style.gap = '1.5rem';
+        subMenu.style.gap = '.5rem';
 
         divPagina.appendChild(subMenu);
         divFooter.appendChild(divPagina);
@@ -218,7 +221,7 @@ crearFooter(links, inicioLinks, visasLinks, contactoLinks);
 // estilos footer
 
 footer.style.width = '100%';
-footer.style.backgroundColor = '#0e3f79';
+footer.style.backgroundColor = '#01194f';
 footer.style.display = 'flex';
 footer.style.alignItems = 'center';
 footer.style.justifyContent = 'center';
@@ -249,5 +252,5 @@ anclas.forEach(a => {
 
 const linksSubMenu = document.querySelectorAll('.linkFooter');
 linksSubMenu.forEach(a=>{
-    a.style.color= '#99bdc8';
+    a.style.color= '#7692bf';
 })

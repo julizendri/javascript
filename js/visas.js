@@ -16,6 +16,7 @@ titulo.innerText = 'Visas';
 paises.forEach(pais=>{
     const divPaises = document.createElement('div');
     divPaises.innerHTML = `<h3>${pais.nombre}</h3>`;
+    divPaises.id = `${toCamelCase(pais.nombre)}`;
     cajaVisas.appendChild(divPaises);
     const h3 = divPaises.querySelector('h3');
     h3.style.color = '#00274D';
@@ -28,4 +29,5 @@ cajaVisas.style.padding = '0 3%';
 cajaVisas.style.maxWidth = '70rem';
 cajaVisas.style.display = 'flex';
 cajaVisas.style.flexDirection = 'column';
+
 titulo.style.color = '#00274D';

@@ -6,7 +6,7 @@ divImagen.innerHTML = `
     <div id="dentroImagen">
         <h1>Gestión de visas</h1>
         <p id="textoImagen">Te ayudamos a gestionar tu visa y realizamos todo el acompañamiento del trámite.</p>
-        <button type="button" id="empezar">Empezar!</button>
+        <button type="button" id="empezar">¡Empezar!</button>
     </div>
 `;
 const divInicio = document.createElement('div');
@@ -44,7 +44,7 @@ divImagen.style.justifyContent = 'center';
 divImagen.style.alignItems = 'center';
 divImagen.style.background = 'url(./img/fondo.jpeg) no-repeat';
 divImagen.style.backgroundSize = 'cover';
-divImagen.style.height = '100vh';
+divImagen.style.height = '65vh';
 
 dentroImagen.style.width = '100%';
 dentroImagen.style.padding = '0 3%';
@@ -57,6 +57,7 @@ dentroImagen.style.textAlign = 'center';
 dentroImagen.style.gap = '1rem';
 dentroImagen.style.position = 'relative';
 dentroImagen.style.color = 'white';
+dentroImagen.style.textShadow = '0 0 3px black';
 
 textoImagen.style.width = '30rem';
 
@@ -67,34 +68,104 @@ botonEmpezar.style.border = 'none';
 botonEmpezar.style.borderRadius = '3px';
 botonEmpezar.style.color = 'white';
 botonEmpezar.style.fontSize = '.8rem';
+botonEmpezar.style.transition = 'all 150ms ease';
 
 // BOTON EMPEZAR
+// declaro variables
 
 const divEmpezar = document.createElement('form');
-divEmpezar.innerHTML = `
-    <label for="destino">¿A que destino desea viajar?</label>
-    <label for="cantidadDeTramites">¿Cuántos trámites desea realizar?</label>
-    <input type="text" id="inputLlenar">
-    <input type="number" id="inputLlenar">
-    <input type="submit" value="Siguiente" id="botonSiguiente">
-`;
+divEmpezar.id = 'divEmpezar';
+
+const labelDestinos = document.createElement('label');
+labelDestinos.innerText = '¿A que destino desea viajar?';
+const selectDestinos = document.createElement('select');
+const labelNroTramites = document.createElement('label');
+labelNroTramites.innerText = '¿Cuántos trámites desea realizar?';
+const selectNroTramites = document.createElement('select');
+const botonSiguiente = document.createElement('button');
+botonSiguiente.type = 'submit';
+botonSiguiente.innerText = 'Siguiente';
+
+// funcion para crear dropdowns (se puede usar en nav?)
+
+function crearDropdown(array, contenedor, getText) {
+    array.forEach(item => {
+        const option = document.createElement('option');
+        option.innerText = getText(item);
+        contenedor.appendChild(option);
+    });
+}
+
+crearDropdown(paises, selectDestinos, item => item.nombre);
+crearDropdown([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], selectNroTramites, item => item);
+
+// estilos 
+
+botonSiguiente.style.gridColumn = '1 / span 2';
+botonSiguiente.style.justifySelf = 'center';
+botonSiguiente.style.width = 'fit-content';
+botonSiguiente.style.backgroundColor = 'white';
+botonSiguiente.style.padding = '0.5rem';
+botonSiguiente.style.border = 'none';
+botonSiguiente.style.borderRadius = '3px';
+botonSiguiente.style.color = '#01194f';
+botonSiguiente.style.fontSize = '.8rem';
+botonSiguiente.style.marginTop = '1rem';
+
+divEmpezar.style.position = 'absolute';
+divEmpezar.style.display = 'grid';
+divEmpezar.style.gridTemplateColumns = '1fr 1fr';
+divEmpezar.style.gridTemplateRows = '1fr 1fr';
+divEmpezar.style.top = '115%';
+divEmpezar.style.width = '80%';
+divEmpezar.style.padding = '1rem';
+divEmpezar.style.maxWidth = '70rem';
+divEmpezar.style.justifyItems = 'center';
+divEmpezar.style.backgroundColor = '#7692bf';
+divEmpezar.style.opacity = '80%';
+divEmpezar.style.borderRadius = '5px';
+divEmpezar.style.textShadow = 'none';
+divEmpezar.style.boxShadow = '0 0 3px #4b5567';
+
+// eventos
 
 botonEmpezar.onclick = () => {
     dentroImagen.contains(divEmpezar) ? dentroImagen.removeChild(divEmpezar) : dentroImagen.appendChild(divEmpezar);
-    const inputs = document.querySelectorAll('#inputLlenar');
-    inputs.forEach(input => {
-        input.style.width = '70%';
-        input.style.padding = '.3rem';
-        input.style.border = 'none';
-        input.style.borderRadius = '3px';
+
+    const selects = document.querySelectorAll('select');
+    selects.forEach((select, index) => {
+        select.style.gridColumn = `${index + 1}`;
+        select.style.gridRow = '2';
+        select.style.backgroundColor = 'white';
+        select.style.boxShadow = 'none';
+        select.style.border = 'none';
+        select.style.color = '#01194f';
+        select.style.width = '80%';
+        select.style.fontSize = '1rem';
+        select.style.padding = '.3rem';
     });
+
     const etiquetas = document.querySelectorAll('label');
-    etiquetas.forEach(etiqueta => {etiqueta.style.color = '#0e3f79'});
+    etiquetas.forEach((etiqueta, index) => {
+        etiqueta.style.color = '#01194f';
+        etiqueta.style.gridColumn = `${index + 1}`;
+        etiqueta.style.gridRow = '1';
+        etiqueta.style.fontSize = '1rem';
+    });
+}
+
+botonSiguiente.onmouseover = () => {
+    botonSiguiente.style.cursor = 'pointer';
+}
+
+botonSiguiente.onclick = () => {
+    window.location.href = 'contacto.html';
 }
 
 botonEmpezar.onmouseover = () => {
     botonEmpezar.style.transform = 'scale(1.1)';
     botonEmpezar.style.backgroundColor = '#d20f29';
+    botonEmpezar.style.cursor = 'pointer';
 }
 botonEmpezar.onmouseout = () => {
     botonEmpezar.style.transform = 'scale(1)';
@@ -105,37 +176,15 @@ divEmpezar.addEventListener('submit', (e) => {
     e.preventDefault();
 })
 
-const botonSiguiente = divEmpezar.querySelector('#botonSiguiente');
+// agrego nodos hijos
 
-botonSiguiente.onclick = () => {
-    window.location.href = 'contacto.html';
-}
+divEmpezar.appendChild(labelDestinos);
+divEmpezar.appendChild(selectDestinos);
+divEmpezar.appendChild(labelNroTramites);
+divEmpezar.appendChild(selectNroTramites);
+divEmpezar.appendChild(botonSiguiente);
 
-// estilos
-
-divEmpezar.style.position = 'absolute';
-divEmpezar.style.display = 'grid';
-divEmpezar.style.gridTemplateColumns = '1fr 1fr';
-divEmpezar.style.top = '115%';
-divEmpezar.style.width = '94%';
-divEmpezar.style.padding = '1rem';
-divEmpezar.style.maxWidth = '70rem';
-divEmpezar.style.justifyItems = 'center';
-divEmpezar.style.backgroundColor = '#99bcd8';
-divEmpezar.style.opacity = '80%';
-divEmpezar.style.borderRadius = '5px';
-
-botonSiguiente.style.gridColumn = '1 / span 2';
-botonSiguiente.style.justifySelf = 'center';
-botonSiguiente.style.width = 'fit-content';
-botonSiguiente.style.backgroundColor = '#f0f0f2';
-botonSiguiente.style.padding = '0.5rem';
-botonSiguiente.style.border = 'none';
-botonSiguiente.style.borderRadius = '3px';
-botonSiguiente.style.color = '#0e3f79';
-botonSiguiente.style.fontSize = '.8rem';
-botonSiguiente.style.marginTop = '.5rem';
-
+// Galeria
 // declaracion de variables para la galeria
 
 const divPaises = document.getElementById('paises');
@@ -143,17 +192,79 @@ const divPaises = document.getElementById('paises');
 // for each para los divs de paises
 
 paises.forEach(pais => {
-    const div = document.createElement('div');
-    div.innerHTML = `
-        <img src="./img/${pais.url}" alt="${pais.nombre}" class="imgGaleria">
-        <h4>${pais.nombre}</h4>
-        <p>${pais.descripcion}</p>
-    `;
-    div.style.display = 'flex';
-    div.style.flexDirection = 'column';
-    div.style.gap = '.5rem';
-    div.style.textAlign = 'center';
-    divPaises.appendChild(div);
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `visas.html#${toCamelCase(pais.nombre)}`;
+    const h4 = document.createElement('h4');
+    h4.innerText = `${pais.nombre}`;
+    const p = document.createElement('p');
+    p.innerText = `${pais.descripcion}`;
+    const boton = document.createElement('button');
+    boton.textContent = 'Saber Más';
+    boton.type = 'button';
+    boton.id = 'botonSaberMas';
+
+    boton.style.width = 'fit-content';
+    boton.style.padding = '.5rem';
+    boton.style.margin = ' 0 1rem 1rem auto';
+    boton.style.backgroundColor = '#d20f29';
+    boton.style.border = 'none';
+    boton.style.borderRadius = '3px';
+    boton.style.color = 'white';
+    boton.style.fontSize = '.8rem';
+    boton.style.justify = 'right';
+    boton.style.transition = 'all 150ms ease';
+
+    p.style.padding = '0 1rem';
+
+    a.style.display = 'flex';
+    a.style.justifyContent = 'center';
+    a.style.alignItems = 'center';
+    a.style.padding = '6rem';
+    a.style.background = `url(./img/${toCamelCase(pais.nombre)}.jpg) no-repeat center center`;
+    a.style.backgroundSize = 'cover';
+    a.style.width = '100%';
+    a.style.maxHeight = '100px';
+
+    h4.style.color = 'white';
+    h4.style.textShadow = '0 0 5px black';
+    h4.style.textAlign = 'center';
+
+    li.style.display = 'flex';
+    li.style.flexDirection = 'column';
+    li.style.width = '100%';
+    li.style.gap = '1rem';
+    li.style.border = 'none';
+    li.style.borderRadius = '5px';
+    li.style.backgroundColor = '#f0f0f2';
+    li.style.overflow = 'hidden';
+    li.style.boxShadow = '0 0 5px #d8d8dd';
+    li.style.transition = 'all 150ms ease';
+
+
+    li.onmouseover = () => {
+        li.style.transform = 'scale(1.05)';
+        boton.onmouseover = () => {
+            boton.style.transform = 'scale(1.1)';
+            boton.style.backgroundColor = '#970017';
+            boton.style.cursor = 'pointer';
+        }
+    }
+    li.onmouseout = () => {
+        boton.style.transform = 'scale(1)';
+        boton.style.backgroundColor = '#d20f29';
+        li.style.transform = 'initial';
+    }
+
+    boton.onclick = () => {
+        window.location.href = `visas.html#${toCamelCase(pais.nombre)}`;
+    }
+
+    a.appendChild(h4);
+    li.appendChild(a);
+    li.appendChild(p);
+    li.appendChild(boton);
+    divPaises.appendChild(li);
 })
 
 // arreglo los tamaños de las imagenes
