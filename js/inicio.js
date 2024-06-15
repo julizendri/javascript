@@ -1,6 +1,7 @@
 // declaracion de variables para la pagina inicio
 
-const headInicio = document.getElementById("headInicio")
+const headInicio = document.getElementById("headInicio");
+const mainInicio = document.getElementById("mainInicio");
 const divImagen = document.createElement('div');
 divImagen.innerHTML = `
     <div id="dentroImagen">
@@ -17,8 +18,8 @@ divInicio.innerHTML = `
 
 // agrego nodos hijos
 
-main.appendChild(divImagen);
-main.appendChild(divInicio);
+mainInicio.appendChild(divImagen);
+mainInicio.appendChild(divInicio);
 
 // declaro mas variables
 
@@ -58,6 +59,7 @@ dentroImagen.style.gap = '1rem';
 dentroImagen.style.position = 'relative';
 dentroImagen.style.color = 'white';
 dentroImagen.style.textShadow = '0 0 3px black';
+dentroImagen.style.marginTop = '75px';
 
 textoImagen.style.width = '30rem';
 
@@ -79,25 +81,27 @@ divEmpezar.id = 'divEmpezar';
 const labelDestinos = document.createElement('label');
 labelDestinos.innerText = '¿A que destino desea viajar?';
 const selectDestinos = document.createElement('select');
+selectDestinos.innerHTML = '<option>Elija una opción</option>';
 const labelNroTramites = document.createElement('label');
 labelNroTramites.innerText = '¿Cuántos trámites desea realizar?';
 const selectNroTramites = document.createElement('select');
+selectNroTramites.innerHTML = '<option>Elija una opción</option>';
 const botonSiguiente = document.createElement('button');
 botonSiguiente.type = 'submit';
 botonSiguiente.innerText = 'Siguiente';
 
-// funcion para crear dropdowns (se puede usar en nav?)
-
-function crearDropdown(array, contenedor, getText) {
-    array.forEach(item => {
-        const option = document.createElement('option');
-        option.innerText = getText(item);
-        contenedor.appendChild(option);
-    });
-}
-
 crearDropdown(paises, selectDestinos, item => item.nombre);
 crearDropdown([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], selectNroTramites, item => item);
+
+// guardar en local storage
+
+selectDestinos.addEventListener('change', () => {
+    guardarLocal('destinoSeleccionado', selectDestinos.value);
+});
+
+selectNroTramites.addEventListener('change', () => {
+    guardarLocal('nroTramitesSeleccionado', selectNroTramites.value);
+});
 
 // estilos 
 
@@ -130,19 +134,23 @@ divEmpezar.style.boxShadow = '0 0 3px #4b5567';
 // eventos
 
 botonEmpezar.onclick = () => {
-    dentroImagen.contains(divEmpezar) ? dentroImagen.removeChild(divEmpezar) : dentroImagen.appendChild(divEmpezar);
+    const divEmpezarPresente = dentroImagen.contains(divEmpezar);
+
+    divEmpezarPresente ? dentroImagen.removeChild(divEmpezar) : dentroImagen.appendChild(divEmpezar);
+
+    divImagen.style.height = divEmpezarPresente ? '65vh' : '75vh';
+    dentroImagen.style.marginTop = divEmpezarPresente ? '75px' : '2px';
+
 
     const selects = document.querySelectorAll('select');
     selects.forEach((select, index) => {
         select.style.gridColumn = `${index + 1}`;
         select.style.gridRow = '2';
-        select.style.backgroundColor = 'white';
         select.style.boxShadow = 'none';
         select.style.border = 'none';
         select.style.color = '#01194f';
         select.style.width = '80%';
         select.style.fontSize = '1rem';
-        select.style.padding = '.3rem';
     });
 
     const etiquetas = document.querySelectorAll('label');
@@ -159,7 +167,7 @@ botonSiguiente.onmouseover = () => {
 }
 
 botonSiguiente.onclick = () => {
-    window.location.href = 'contacto.html';
+    window.location.href = 'nosotros.html#contacto';
 }
 
 botonEmpezar.onmouseover = () => {
@@ -206,7 +214,7 @@ paises.forEach(pais => {
 
     boton.style.width = 'fit-content';
     boton.style.padding = '.5rem';
-    boton.style.margin = ' 0 1rem 1rem auto';
+    boton.style.margin = ' 0 1rem 1rem 1rem';
     boton.style.backgroundColor = '#d20f29';
     boton.style.border = 'none';
     boton.style.borderRadius = '3px';
@@ -214,8 +222,11 @@ paises.forEach(pais => {
     boton.style.fontSize = '.8rem';
     boton.style.justify = 'right';
     boton.style.transition = 'all 150ms ease';
+    boton.style.boxShadow = '0 0 3px #d8d8dd';
 
     p.style.padding = '0 1rem';
+    p.style.fontSize = '1rem';
+    p.style.color = '#494f5d';
 
     a.style.display = 'flex';
     a.style.justifyContent = 'center';

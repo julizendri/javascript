@@ -1,11 +1,54 @@
 // General
 const cuerpo = document.body;
 const paises = [
-    { nombre: 'Estados Unidos', descripcion: 'EEUU', url: 'usa.jpg' },
-    { nombre: 'Australia', descripcion: 'AUS', url: 'aus.jpg' },
-    { nombre: 'Canadá', descripcion: 'CAN', url: 'can.jpg' },
+    {
+        nombre: 'Estados Unidos',
+        descripcion: 'Famoso por su diversidad cultural y poder económico, alberga ciudades icónicas como Nueva York y maravillas naturales como el Gran Cañón.',
+        url: 'usa.jpg'
+    },
+    {
+        nombre: 'Australia',
+        descripcion: 'Conocido por su biodiversidad única y playas impresionantes, ofrece ciudades vibrantes como Sídney y Melbourne, además de aventuras al aire libre.',
+        url: 'aus.jpg'
+    },
+    {
+        nombre: 'Canadá',
+        descripcion: 'Situado en el norte de América, se distingue por sus paisajes naturales, ciudades cosmopolitas como Toronto y Vancouver, y su bilingüismo.',
+        url: 'can.jpg'
+    },
 ];
 cuerpo.style.backgroundColor = '#f0f0f2';
+
+// funcion para convertir links en camelCase
+
+function toCamelCase(string) {
+    string = string.replace(/[á]/g, 'a');
+
+    return string.toLowerCase().replace(/(?:\b\w|\s+)/g, function (match, index) {
+        return index === 0 ? match.toLowerCase() : match.toUpperCase();
+    }).replace(/\s+/g, '');
+}
+
+// funcion guardar y sacar de local storage
+
+function guardarLocal(clave, valor) {
+    localStorage.setItem(clave, valor);
+}
+
+function sacarLocal(clave){
+    const objeto = localStorage.getItem(clave);
+    return objeto;
+}
+
+// funcion para crear dropdowns (se puede usar en nav?)
+
+function crearDropdown(array, contenedor, getText) {
+    array.forEach(item => {
+        const option = document.createElement('option');
+        option.innerText = getText(item);
+        contenedor.appendChild(option);
+    });
+}
 
 // reset y letra
 
@@ -19,6 +62,9 @@ style.innerHTML = `
         box-sizing: border-box;
         list-style: none;
     }
+    .hidden {
+        display: none;
+    }
 `;
 document.head.appendChild(style);
 
@@ -30,7 +76,7 @@ const navegador = document.createElement('div');
 const nav = document.createElement('nav');
 const ulPages = document.createElement('ul');
 const ancla = document.createElement('a');
-const links = ["Inicio", "Visas", "Contacto"];
+const links = ["Inicio", "Visas", "Nosotros"];
 const ulLogo = document.createElement('ul');
 const liLogo = document.createElement('li');
 const imgLogo = document.createElement('img');
@@ -47,6 +93,7 @@ imgLogo.alt = 'Hago tu visa';
 links.forEach(link => {
     const li = document.createElement('li');
     li.innerHTML = `<a href="${link.toLowerCase()}.html">${link}</a>`;
+    li.id = `${toCamelCase(link)}`;
     ulPages.appendChild(li);
 
     li.style.padding = '.2rem';
@@ -58,11 +105,11 @@ links.forEach(link => {
     li.onmouseover = () => {
         li.style.transform = 'scale(1.1)';
         li.style.textShadow = '0 0 3px #7692bf';
-    }
+    };
     li.onmouseout = () => {
         li.style.transform = 'scale(1)';
         li.style.textShadow = 'initial';
-    }
+    };
 })
 
 // agrego a los nodos hijos
@@ -138,9 +185,9 @@ const parrafoFooter = document.createElement('p');
 const anio = new Date().getFullYear();
 parrafoFooter.innerText = `Hago tu visa - ${anio} - Todos los derechos reservados.`;
 
-const inicioLinks = ['Empezar', 'Paises', 'Opiniones'];
+const inicioLinks = ['Empezar', 'Paises'];
 const visasLinks = ['Estados Unidos', 'Australia', 'Canadá'];
-const contactoLinks = ['Nosotros', 'Contacto'];
+const contactoLinks = ['Sobre Nosotros', 'Contacto'];
 
 // for each para los socials
 
@@ -152,23 +199,13 @@ linksSocials.forEach(link => {
     img.style.width = '20px';
 })
 
-// funcion para convertir links en camelCase
-
-function toCamelCase(string) {
-    string = string.replace(/[á]/g, 'a');
-
-    return string.toLowerCase().replace(/(?:\b\w|\s+)/g, function(match, index) {
-        return index === 0 ? match.toLowerCase() : match.toUpperCase();
-    }).replace(/\s+/g, '');
-}
-
 // nav del footer
 function crearFooter(links, inicioLinks, visasLinks, contactoLinks) {
     links.forEach((pagina, index) => {
         const divPagina = document.createElement('div');
         divPagina.className = 'divPagina';
 
-        divPagina.style.gridColumn = `${index +2}`;
+        divPagina.style.gridColumn = `${index + 2}`;
         divPagina.style.gridRow = '1 / span 3';
         divPagina.style.display = 'flex';
         divPagina.style.flexDirection = 'column';
@@ -193,6 +230,7 @@ function crearFooter(links, inicioLinks, visasLinks, contactoLinks) {
             a.href = `${pagina.toLowerCase()}.html#${toCamelCase(link)}`;
             a.innerText = link;
             a.className = 'linkFooter';
+            a.id = `${toCamelCase(link)}Footer`;
             li.appendChild(a);
             subMenu.appendChild(li);
 
@@ -251,6 +289,6 @@ anclas.forEach(a => {
 });
 
 const linksSubMenu = document.querySelectorAll('.linkFooter');
-linksSubMenu.forEach(a=>{
-    a.style.color= '#7692bf';
+linksSubMenu.forEach(a => {
+    a.style.color = '#7692bf';
 })
