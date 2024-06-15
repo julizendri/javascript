@@ -48,7 +48,7 @@ main.appendChild(divNosotros);
 // declaracion de variables
 
 const formContainer = document.createElement('div');
-formContainer.id = 'formContainer';
+formContainer.id = 'contacto';
 
 main.appendChild(formContainer);
 
@@ -109,14 +109,6 @@ function crearCampos(arrayElementos) {
         input.placeholder = elemento.placeholder;
         input.id = elemento.name;
 
-        input.style.padding = '.5rem';
-        input.style.border = 'none';
-        input.style.boxShadow = '0 0 3px #d8d8dd';
-        input.style.borderRadius = '3px';
-        input.style.width = '100%';
-
-
-
         elemento.tipo === 'select' && elemento.options.forEach(opcion => {
             const option = document.createElement('option');
             option.value = opcion;
@@ -153,10 +145,6 @@ function crearCamposRepetidos(arrayNombre, arrayNacimiento, arrayContacto) {
         const h3 = document.createElement('h3');
         h3.innerText = `Persona ${i}`;
 
-        h3.style.padding = '.5rem 0';
-        h3.style.color = '#00274D';
-
-
         divPersona.style.padding = '1rem 0';
         divPersona.style.display = 'grid';
         divPersona.style.gap = '1rem';
@@ -180,7 +168,7 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     formContainer.innerHTML = '';
 
     const frase = document.createElement('h2');
-    frase.innerText = '¡Comenzá tu trpamite con nosotros!';
+    frase.innerText = '¡Comenzá tu trámite con nosotros!';
 
     frase.style.color = '#00274D';
 
@@ -198,9 +186,6 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
 
     const h3 = document.createElement('h3');
     h3.textContent = 'Datos';
-    h3.style.padding = '.5rem 0';
-    h3.style.color = '#00274D';
-
 
     const divNombreForm = crearCampos(arrayNombre);
     divNombreForm.id = 'nombreDiv';
@@ -235,7 +220,7 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     botonEnviar.style.boxShadow = '0 0 3px #4b5567';
     botonEnviar.style.border = '1px solid #d20f29';
     botonEnviar.style.padding = '0 1rem';
-    botonEnviar.style.height = '2.5rem';
+    botonEnviar.style.height = '2.3rem';
 
     // eventos del form
 
@@ -425,16 +410,8 @@ anioSelect.forEach(label => {
     label.style.gridColumn = '3';
 });
 
-const selects = document.querySelectorAll('select');
-selects.forEach(select => {
-    select.style.padding = '1rem';
-    select.style.color = '#494f5d';
-    select.style.width = '100%';
-    select.style.fontSize = '1rem';
-
-});
-
-const elementoUndefined = document.querySelectorAll('undefined');
-elementoUndefined.forEach(elemento => {
-    elemento.style.display = 'none';
+const h3 = document.querySelectorAll('h3');
+h3.forEach(titulo => {
+    titulo.style.padding = '.5rem 0';
+    titulo.style.color = '#00274D';
 });

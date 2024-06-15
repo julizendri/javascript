@@ -35,7 +35,7 @@ function guardarLocal(clave, valor) {
     localStorage.setItem(clave, valor);
 }
 
-function sacarLocal(clave){
+function sacarLocal(clave) {
     const objeto = localStorage.getItem(clave);
     return objeto;
 }
@@ -63,6 +63,22 @@ style.innerHTML = `
         list-style: none;
     }
     .hidden {
+        display: none;
+    }
+    select {
+        padding: 1rem;
+        color: #494f5d;
+        width: 100%;
+        font-size: 2rem;
+    }
+    input {
+        padding: .5rem;
+        border: none;
+        box-shadow: 0 0 3px #d8d8dd;
+        border-radius: 5px;
+        width: 100%;
+    }
+    undefined{
         display: none;
     }
 `;
