@@ -40,7 +40,7 @@ function sacarLocal(clave) {
     return objeto;
 }
 
-// funcion para crear dropdowns (se puede usar en nav?)
+// funcion para crear selects
 
 function crearDropdown(array, contenedor, getText) {
     array.forEach(item => {
@@ -78,7 +78,7 @@ style.innerHTML = `
         border-radius: 5px;
         width: 100%;
     }
-    undefined{
+    null {
         display: none;
     }
 `;
@@ -126,7 +126,7 @@ links.forEach(link => {
         li.style.transform = 'scale(1)';
         li.style.textShadow = 'initial';
     };
-})
+});
 
 // agrego a los nodos hijos
 
@@ -235,10 +235,7 @@ function crearFooter(links, inicioLinks, visasLinks, contactoLinks) {
         paginaLink.style.fontSize = '.9rem';
 
         const subMenu = document.createElement('ul');
-        let enlaces;
-        if (index === 0) enlaces = inicioLinks;
-        else if (index === 1) enlaces = visasLinks;
-        else if (index === 2) enlaces = contactoLinks;
+        const enlaces = index === 0 ? inicioLinks : index === 1 ? visasLinks : contactoLinks;
 
         enlaces.forEach(link => {
             const li = document.createElement('li');

@@ -106,7 +106,7 @@ function crearCampos(arrayElementos) {
 
         const input = document.createElement(elemento.tipo);
         input.name = elemento.name;
-        input.placeholder = elemento.placeholder;
+        input.placeholder = `${elemento.options}`;
         input.id = elemento.name;
 
         elemento.tipo === 'select' && elemento.options.forEach(opcion => {
@@ -172,7 +172,6 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
 
     frase.style.color = '#00274D';
 
-
     const divFormulario = document.createElement('div');
     divFormulario.id = 'formulario';
 
@@ -187,6 +186,8 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     const h3 = document.createElement('h3');
     h3.textContent = 'Datos';
 
+    // crear divs
+
     const divNombreForm = crearCampos(arrayNombre);
     divNombreForm.id = 'nombreDiv';
     const divNacimientoForm = crearCampos(arrayNacimiento);
@@ -196,6 +197,8 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     const divContactoForm = crearCampos(arrayContacto);
     divContactoForm.id = 'contactoDiv';
 
+    // agrego nodos hijos
+
     divFormulario.appendChild(divInicio);
     divFormulario.appendChild(h3);
     divFormulario.appendChild(divNombreForm);
@@ -203,8 +206,12 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     divFormulario.appendChild(divPaisForm);
     divFormulario.appendChild(divContactoForm);
 
+    // llamo a los campos repetidos
+
     const divCamposRepetidos = crearCamposRepetidos(arrayNombre, arrayNacimiento, arrayContacto);
     divFormulario.appendChild(divCamposRepetidos);
+
+    // boton enviar
 
     const botonEnviar = document.createElement('button');
     botonEnviar.innerText = 'Enviar';
@@ -241,6 +248,8 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
         alert('¡Gracias por contactarnos!\nPronto nos estaremos comunicando.')
     }
 
+    // agregar nodos hijos
+
     divFormulario.appendChild(botonEnviar);
     formContainer.appendChild(frase);
     formContainer.appendChild(divFormulario);
@@ -261,157 +270,99 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
         guardarLocal('nroTramitesSeleccionado', selectNroTramitesForm.value);
         crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arrayPais, arrayContacto);
     });
+
+    // estilos especiales
+
+    const divNacimiento = document.querySelectorAll('#nacimientoDiv');
+    divNacimiento.forEach(div => {
+        div.style.gridTemplateColumns = '1fr 1fr 1fr';
+        div.style.gridTemplateRows = '1fr 1fr 1fr';
+    });
+
+    const diaLabel = document.querySelectorAll('#diaLabel');
+    diaLabel.forEach(label => {
+        label.style.gridRow = '2';
+        label.style.gridColumn = '1';
+    });
+
+    const diaSelect = document.querySelectorAll('#dia');
+    diaSelect.forEach(label => {
+        label.gridRow = '3';
+        label.style.gridColumn = '1';
+    });
+
+    const mesLabel = document.querySelectorAll('#mesLabel');
+    mesLabel.forEach(label => {
+        label.style.gridRow = '2';
+        label.style.gridColumn = '2';
+    });
+
+    const mesSelect = document.querySelectorAll('#mes');
+    mesSelect.forEach(label => {
+        label.style.gridRow = '3';
+        label.style.gridColumn = '2';
+    });
+
+    const anioLabel = document.querySelectorAll('#anioLabel');
+    anioLabel.forEach(label => {
+        label.style.gridRow = '2';
+        label.style.gridColumn = '3';
+    });
+
+    const anioSelect = document.querySelectorAll('#anio');
+    anioSelect.forEach(label => {
+        label.style.gridRow = '3';
+        label.style.gridColumn = '3';
+    });
+
+    const titulosPersonas = document.querySelectorAll('h3');
+    titulosPersonas.forEach(titulo => {
+        titulo.style.padding = '.5rem 0';
+        titulo.style.color = '#00274D';
+    });
 }
 
-// Arrays
+// funcion para crear arrays
+
+function crearElemento(label, tipo, name, options) {
+    return {
+        label: label,
+        tipo: tipo,
+        name: name,
+        options: options,
+    };
+}
 
 const arrayInicio = [
-    {
-        label: 'Destinos',
-        tipo: 'select',
-        name: 'destinos',
-        options: paises.map(pais => pais.nombre),
-    },
-    {
-        label: 'Número de trámites',
-        tipo: 'select',
-        name: 'nroTramites',
-        options: Array.from({ length: 10 }, (_, i) => i + 1),
-    },
+    crearElemento('Destinos', 'select', 'destinos', paises.map(pais => pais.nombre)),
+    crearElemento('Número de trámites', 'select', 'nroTramites', Array.from({ length: 10 }, (_, i) => i + 1)),
 ];
 
+
 const arrayNombre = [
-    {
-        label: 'Nombres Completos',
-        tipo: 'input',
-        name: 'nombre',
-        placeholder: 'Nombres completos',
-    },
-    {
-        label: 'Apellidos Completos',
-        tipo: 'input',
-        name: 'apellidos',
-        placeholder: 'Apellidos completos',
-    },
+    crearElemento('Nombres Completos', 'input', 'nombre', 'Nombres completos'),
+    crearElemento('Apellidos Completos', 'input', 'apellidos', 'Apellidos completos'),
 ];
 
 const arrayNacimiento = [
-    {
-        label: 'Fecha de nacimiento',
-        name: 'nacimientoDiv'
-    },
-    {
-        label: 'Día',
-        tipo: 'select',
-        name: 'dia',
-        options: Array.from({ length: 31 }, (_, i) => i + 1),
-    },
-    {
-        label: 'Mes',
-        tipo: 'select',
-        name: 'mes',
-        options: Array.from({ length: 12 }, (_, i) => i + 1),
-    },
-    {
-        label: 'Año',
-        tipo: 'select',
-        name: 'anio',
-        options: Array.from({ length: 121 }, (_, i) => new Date().getFullYear() - i),
-    },
+    crearElemento('Fecha de nacimiento', null, 'nacimientoDiv', null),
+    crearElemento('Día', 'select', 'dia', Array.from({ length: 31 }, (_, i) => i + 1)),
+    crearElemento('Mes', 'select', 'mes', Array.from({ length: 12 }, (_, i) => i + 1)),
+    crearElemento('Año', 'select', 'anio', Array.from({ length: 121 }, (_, i) => new Date().getFullYear() - i)),
 ];
 
 const arrayPais = [
-    {
-        label: 'País',
-        tipo: 'input',
-        name: 'pais',
-        placeholder: 'País',
-    },
-    {
-        label: 'Provincia/Estado',
-        tipo: 'input',
-        name: 'provincia',
-        placeholder: 'Provincia/Estado',
-    },
-    {
-        label: 'Ciudad',
-        tipo: 'input',
-        name: 'ciudad',
-        placeholder: 'Ciudad',
-    },
-    {
-        label: 'Código Postal',
-        tipo: 'input',
-        name: 'codigoPostal',
-        placeholder: 'Código Postal',
-    },
+    crearElemento('País', 'input', 'pais', 'País'),
+    crearElemento('Provincia/Estado', 'input', 'provincia', 'Provincia/Estado'),
+    crearElemento('Ciudad', 'input', 'ciudad', 'Ciudad'),
+    crearElemento('Código Postal', 'input', 'codigoPostal', 'Código Postal'),
 ];
 
 const arrayContacto = [
-    {
-        label: 'Teléfono',
-        tipo: 'input',
-        name: 'telefono',
-        placeholder: 'Teléfono',
-    },
-    {
-        label: 'Email',
-        tipo: 'input',
-        name: 'email',
-        placeholder: 'Email',
-    },
+    crearElemento('Teléfono', 'input', 'telefono', 'Teléfono'),
+    crearElemento('Email', 'input', 'email', 'Email'),
 ];
 
 // llamo a la funcion para crear el form
 
 crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arrayPais, arrayContacto);
-
-// estilos especiales
-
-const divNacimientoForm = document.querySelectorAll('#nacimientoDiv');
-divNacimientoForm.forEach(div => {
-    div.style.gridTemplateColumns = '1fr 1fr 1fr';
-    div.style.gridTemplateRows = '1fr 1fr 1fr';
-})
-
-const diaLabel = document.querySelectorAll('#diaLabel');
-diaLabel.forEach(label => {
-    label.style.gridRow = '2';
-    label.style.gridColumn = '1';
-});
-
-const diaSelect = document.querySelectorAll('#dia');
-diaSelect.forEach(label => {
-    label.gridRow = '3';
-    label.style.gridColumn = '1';
-});
-
-const mesLabel = document.querySelectorAll('#mesLabel');
-mesLabel.forEach(label => {
-    label.style.gridRow = '2';
-    label.style.gridColumn = '2';
-});
-
-const mesSelect = document.querySelectorAll('#mes');
-mesSelect.forEach(label => {
-    label.style.gridRow = '3';
-    label.style.gridColumn = '2';
-});
-
-const anioLabel = document.querySelectorAll('#anioLabel');
-anioLabel.forEach(label => {
-    label.style.gridRow = '2';
-    label.style.gridColumn = '3';
-});
-
-const anioSelect = document.querySelectorAll('#anio');
-anioSelect.forEach(label => {
-    label.style.gridRow = '3';
-    label.style.gridColumn = '3';
-});
-
-const h3 = document.querySelectorAll('h3');
-h3.forEach(titulo => {
-    titulo.style.padding = '.5rem 0';
-    titulo.style.color = '#00274D';
-});
