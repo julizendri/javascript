@@ -119,11 +119,9 @@ links.forEach(link => {
     // evento hover
 
     li.onmouseover = () => {
-        li.style.transform = 'scale(1.1)';
         li.style.textShadow = '0 0 3px #7692bf';
     };
     li.onmouseout = () => {
-        li.style.transform = 'scale(1)';
         li.style.textShadow = 'initial';
     };
 });
@@ -163,7 +161,66 @@ ulPages.style.alignItems = 'center';
 ulLogo.style.padding = '1rem 0';
 ulLogo.style.display = 'flex';
 
-// eventos header
+// dropdown paises
+
+const linkVisas = document.querySelector('#visas');
+const dropdown = document.createElement('ul');
+
+// estilos
+
+linkVisas.style.position = 'relative';
+
+dropdown.style.display = 'none';
+dropdown.style.position = 'absolute';
+dropdown.style.top = '100%';
+dropdown.style.left = '-150%';
+dropdown.style.padding = '.5rem';
+dropdown.style.width = '450%';
+dropdown.style.borderRadius = '3px';
+dropdown.style.backgroundColor = '#7692bf';
+
+// foer each para los paises
+
+paises.forEach(pais=>{
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `visas.html#${toCamelCase(pais.nombre)}`;
+    a.innerText = `${pais.nombre}`;
+
+    // estilos
+
+    li.style.margin = '.5rem';
+
+    a.style.padding = '.5rem';
+    a.style.textShadow = '0 0 3px #01194f';
+
+    // eventos
+
+    a.onmouseover = () => {
+        a.style.textShadow = '0 0 3px red';
+    };
+    a.onmouseout = () => {
+        a.style.textShadow = 'initial';
+    };
+
+    // agrego nodos hijos
+
+    li.appendChild(a);
+    dropdown.appendChild(li);
+})
+
+linkVisas.appendChild(dropdown);
+
+// eventos
+
+linkVisas.onmouseover = () => {
+    dropdown.style.display = 'block';
+    linkVisas.style.textShadow = '0 0 3px #7692bf';
+}
+linkVisas.onmouseout = () => {
+    dropdown.style.display = 'none';
+    linkVisas.style.textShadow = 'initial';
+}
 
 // MAIN
 // declaracion de variables para el main y trabajo cada main en los diferentes archivos.js
@@ -188,7 +245,7 @@ const divSocials = document.createElement('div');
 divSocials.id = 'divSocials';
 const linksSocials = [
     { nombre: 'IG', url: 'https://www.instagram.com/hagotuvisa/' },
-    { nombre: 'Email', url: 'mailto:sosa.paula8@gmail.com' },
+    { nombre: 'Email', url: 'mailto:hagotuvisa@gmail.com' },
 ];
 
 const anclaFooter = document.createElement('a');
