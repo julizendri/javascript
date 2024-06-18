@@ -92,14 +92,14 @@ const navegador = document.createElement('div');
 const nav = document.createElement('nav');
 const ulPages = document.createElement('ul');
 const ancla = document.createElement('a');
-const links = ["Inicio", "Visas", "Nosotros"];
+const links = ["Index", "Visas", "Nosotros"];
 const ulLogo = document.createElement('ul');
 const liLogo = document.createElement('li');
 const imgLogo = document.createElement('img');
 
 //agrego la imagen logo
 
-ancla.href = 'inicio.html';
+ancla.href = 'index.html';
 ancla.appendChild(imgLogo);
 imgLogo.src = 'img/logoBlanco.png';
 imgLogo.alt = 'Hago tu visa';
@@ -249,7 +249,7 @@ const linksSocials = [
 ];
 
 const anclaFooter = document.createElement('a');
-anclaFooter.href = 'inicio.html';
+anclaFooter.href = 'index.html';
 const imgLogoFooter = document.createElement('img');
 imgLogoFooter.src = 'img/logoBlanco.png';
 imgLogoFooter.alt = 'Hago tu visa';
@@ -258,7 +258,7 @@ const parrafoFooter = document.createElement('p');
 const anio = new Date().getFullYear();
 parrafoFooter.innerText = `Hago tu visa - ${anio} - Todos los derechos reservados.`;
 
-const inicioLinks = ['Empezar', 'Paises'];
+const indexLinks = ['Empezar', 'Paises'];
 const visasLinks = ['Estados Unidos', 'Australia', 'Canadá'];
 const contactoLinks = ['Sobre Nosotros', 'Contacto'];
 
@@ -273,7 +273,7 @@ linksSocials.forEach(link => {
 })
 
 // nav del footer
-function crearFooter(links, inicioLinks, visasLinks, contactoLinks) {
+function crearFooter(links, indexLinks, visasLinks, contactoLinks) {
     links.forEach((pagina, index) => {
         const divPagina = document.createElement('div');
         divPagina.className = 'divPagina';
@@ -292,7 +292,7 @@ function crearFooter(links, inicioLinks, visasLinks, contactoLinks) {
         paginaLink.style.fontSize = '.9rem';
 
         const subMenu = document.createElement('ul');
-        const enlaces = index === 0 ? inicioLinks : index === 1 ? visasLinks : contactoLinks;
+        const enlaces = index === 0 ? indexLinks : index === 1 ? visasLinks : contactoLinks;
 
         enlaces.forEach(link => {
             const li = document.createElement('li');
@@ -324,7 +324,7 @@ anclaFooter.appendChild(imgLogoFooter);
 divFooter.appendChild(anclaFooter);
 divFooter.appendChild(parrafoFooter);
 
-crearFooter(links, inicioLinks, visasLinks, contactoLinks);
+crearFooter(links, indexLinks, visasLinks, contactoLinks);
 
 // estilos footer
 
