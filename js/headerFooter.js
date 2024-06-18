@@ -69,7 +69,8 @@ style.innerHTML = `
         padding: 1rem;
         color: #494f5d;
         width: 100%;
-        font-size: 2rem;
+        font-size: 1rem;
+        border: none;
     }
     input {
         padding: .5rem;
