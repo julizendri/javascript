@@ -108,8 +108,13 @@ imgLogo.alt = 'Hago tu visa';
 
 links.forEach(link => {
     const li = document.createElement('li');
-    li.innerHTML = `<a href="${link.toLowerCase()}.html">${link}</a>`;
     li.id = `${toCamelCase(link)}`;
+    const a = document.createElement('a');
+    a.href = `${link.toLowerCase()}.html`;
+    a.innerText = `${link}`;
+    a.id = `id${link}`;
+    
+    li.appendChild(a);
     ulPages.appendChild(li);
 
     li.style.padding = '.2rem';
@@ -287,6 +292,7 @@ function crearFooter(links, indexLinks, visasLinks, contactoLinks) {
         const paginaLink = document.createElement('a');
         paginaLink.href = `${pagina.toLowerCase()}.html`;
         paginaLink.innerText = pagina;
+        paginaLink.id = `id${pagina}`;
         divPagina.appendChild(paginaLink);
 
         paginaLink.style.fontSize = '.9rem';
@@ -300,7 +306,7 @@ function crearFooter(links, indexLinks, visasLinks, contactoLinks) {
             a.href = `${pagina.toLowerCase()}.html#${toCamelCase(link)}`;
             a.innerText = link;
             a.className = 'linkFooter';
-            a.id = `${toCamelCase(link)}Footer`;
+
             li.appendChild(a);
             subMenu.appendChild(li);
 
@@ -361,4 +367,11 @@ anclas.forEach(a => {
 const linksSubMenu = document.querySelectorAll('.linkFooter');
 linksSubMenu.forEach(a => {
     a.style.color = '#7692bf';
-})
+});
+
+// estilo especial
+
+const idIndex = document.querySelectorAll('#idIndex');
+idIndex.forEach(texto => {
+    texto.innerText = 'Inicio';
+});
