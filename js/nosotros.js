@@ -91,11 +91,9 @@ function crearCampos(arrayElementos) {
     const div = document.createElement('div');
     div.id = `${arrayElementos[0].name}`;
 
-
     div.style.display = 'grid';
     div.style.gridTemplateColumns = `repeat(${arrayElementos.length}, 1fr)`;
     div.style.gap = '.5rem 1rem';
-
 
     arrayElementos.forEach(elemento => {
         const label = document.createElement('label');
@@ -115,7 +113,7 @@ function crearCampos(arrayElementos) {
             option.textContent = opcion;
             input.appendChild(option);
         });
-
+        
         div.appendChild(label);
         div.appendChild(input);
     });
@@ -245,8 +243,29 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     }
 
     botonEnviar.onclick = () => {
-        alert('¡Gracias por contactarnos!\nPronto nos estaremos comunicando.')
-    }
+        Swal.fire({
+            title: "¿Quiere guardar y enviar los cambios?",
+            showDenyButton: true,
+            confirmButtonText: "Si",
+            denyButtonText: `No`,
+            color: "#494f5d",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Su información ha sido enviada",
+                    text: "Pronto nos estaremos comunicando con usted.",
+                    icon: "succes",
+                    confirmButtonText: "Finalizar",
+                    color: "#494f5d",
+                });
+            } else if (result.isDenied) {
+            Swal.fire({
+                title:"Los cambios no han sido guardados",
+                icon: "error",
+                color: '#494f5d'
+            });
+            }
+        });    }
 
     // agregar nodos hijos
 

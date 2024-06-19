@@ -6,7 +6,7 @@ const divImagen = document.createElement('div');
 divImagen.innerHTML = `
     <div id="dentroImagen">
         <h1>Gestión de visas</h1>
-        <p id="textoImagen">Te ayudamos a gestionar tu visa y realizamos todo el acompañamiento del trámite.</p>
+        <p id="textoImagen">Gestionamos tu visa y realizamos todo el trámite.</p>
         <button type="button" id="empezar">¡Empezar!</button>
     </div>
 `;
@@ -115,6 +115,7 @@ botonSiguiente.style.borderRadius = '3px';
 botonSiguiente.style.color = '#01194f';
 botonSiguiente.style.fontSize = '.8rem';
 botonSiguiente.style.marginTop = '1rem';
+botonSiguiente.style.transition = 'all 150ms ease';
 
 divEmpezar.style.position = 'absolute';
 divEmpezar.style.display = 'grid';
@@ -163,7 +164,16 @@ botonEmpezar.onclick = () => {
 }
 
 botonSiguiente.onmouseover = () => {
+    botonSiguiente.style.transform = 'scale(1.05)';
+    botonSiguiente.style.color = 'white';
+    botonSiguiente.style.backgroundColor = '#01194f';
     botonSiguiente.style.cursor = 'pointer';
+}
+
+botonSiguiente.onmouseout = () => {
+    botonSiguiente.style.transform = 'initial';
+    botonSiguiente.style.color = 'initial';
+    botonSiguiente.style.backgroundColor= 'white';
 }
 
 botonSiguiente.onclick = () => {

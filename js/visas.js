@@ -32,7 +32,7 @@ paises.forEach(pais => {
     botonComenzar.style.color = 'white';
     botonComenzar.style.fontSize = '.8rem';
     botonComenzar.style.boxShadow = '0 0 3px #4b5567';
-    botonComenzar.style.border = '1px solid #d20f29';
+    botonComenzar.style.border = 'none';
     botonComenzar.style.padding = '0 1rem';
     botonComenzar.style.height = '2.3rem';
 
@@ -58,6 +58,16 @@ paises.forEach(pais => {
         // storage
         guardarLocal('destinoSeleccionado', pais.nombre);
     };
+
+    botonComenzar.onmouseover = () => {
+        botonComenzar.style.transform = 'scale(1.1)';
+        botonComenzar.style.backgroundColor = '#970017';
+        botonComenzar.style.cursor = 'pointer';
+    }
+    botonComenzar.onmouseout = () => {
+        botonComenzar.style.transform = 'scale(1)';
+        botonComenzar.style.backgroundColor = '#d20f29';
+    }
 
 
     // agrego nodos hijos

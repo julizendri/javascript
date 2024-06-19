@@ -54,34 +54,7 @@ function crearDropdown(array, contenedor, getText) {
 
 const style = document.createElement('style');
 style.innerHTML = `
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: 'Trebuchet MS';
-        text-decoration: none;
-        box-sizing: border-box;
-        list-style: none;
-    }
-    .hidden {
-        display: none;
-    }
-    select {
-        padding: 1rem;
-        color: #494f5d;
-        width: 100%;
-        font-size: 1rem;
-        border: none;
-    }
-    input {
-        padding: .5rem;
-        border: none;
-        box-shadow: 0 0 3px #d8d8dd;
-        border-radius: 5px;
-        width: 100%;
-    }
-    null {
-        display: none;
-    }
+
 `;
 document.head.appendChild(style);
 
