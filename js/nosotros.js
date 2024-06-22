@@ -123,7 +123,7 @@ function crearCampos(arrayElementos) {
 
 // funcion para crear divs si hay 2 personas o mas
 
-function crearCamposRepetidos(arrayNombre, arrayNacimiento, arrayContacto) {
+function crearCamposRepetidos(arrayNombre, arrayNacimiento,) {
     const divCamposRepetidos = document.createElement('div');
     divCamposRepetidos.id = 'camposRepetidos';
 
@@ -140,6 +140,7 @@ function crearCamposRepetidos(arrayNombre, arrayNacimiento, arrayContacto) {
 
     for (let i = 2; i <= nroTramites; i++) {
         const divPersona = document.createElement('div');
+        divPersona.id = `persona${i}`;
         const h3 = document.createElement('h3');
         h3.innerText = `Persona ${i}`;
 
@@ -149,17 +150,72 @@ function crearCamposRepetidos(arrayNombre, arrayNacimiento, arrayContacto) {
 
         const divNombrePersona = crearCampos(arrayNombre);
         const divNacimientoPersona = crearCampos(arrayNacimiento);
-        const divContactoPersona = crearCampos(arrayContacto);
 
         divPersona.appendChild(h3);
         divPersona.appendChild(divNombrePersona);
         divPersona.appendChild(divNacimientoPersona);
-        divPersona.appendChild(divContactoPersona);
 
         divCamposRepetidos.appendChild(divPersona);
     }
 
     return divCamposRepetidos;
+}
+
+// funcion storage
+
+function guardarDatosFormulario() {
+
+    const nroTramites = parseInt(localStorage.getItem('nroTramitesSeleccionado'), 10) || 1;
+
+    for (i = 1; i <= nroTramites; i++) {
+        const persona = {};
+
+        if (i === 1) {
+            const nombre = document.querySelector(`#persona${i} #nombreDiv input[name="nombre"]`);
+            const apellidos = document.querySelector(`#persona${i} #nombreDiv input[name="apellidos"]`);
+            const dia = document.querySelector(`#persona${i} #nacimientoDiv select[name="dia"]`);
+            const mes = document.querySelector(`#persona${i} #nacimientoDiv select[name="mes"]`);
+            const anio = document.querySelector(`#persona${i} #nacimientoDiv select[name="anio"]`);    
+            const pais = document.querySelector(`#persona${i} #paisDiv input[name="pais"]`);
+            const provincia = document.querySelector(`#persona${i} #paisDiv input[name="provincia"]`);
+            const ciudad = document.querySelector(`#persona${i} #paisDiv input[name="ciudad"]`);
+            const codigoPostal = document.querySelector(`#persona${i} #paisDiv input[name="codigoPostal"]`);
+            const telefono = document.querySelector(`#persona${i} #contactoDiv input[name="telefono"]`);
+            const email = document.querySelector(`#persona${i} #contactoDiv input[name="email"]`);
+
+            persona.nombre = nombre.value;
+            persona.apellidos = apellidos.value;
+            persona.fechaNacimiento = {
+                dia: dia.value,
+                mes: mes.value,
+                anio: anio.value
+            };
+            persona.pais = pais.value;
+            persona.provincia = provincia.value;
+            persona.ciudad = ciudad.value;
+            persona.codigoPostal = codigoPostal.value;
+            persona.telefono = telefono.value;
+            persona.email = email.value;
+
+        } else {
+            const nombre = document.querySelector(`#persona${i} #nombre input[name="nombre"]`);
+            const apellidos = document.querySelector(`#persona${i} #nombre input[name="apellidos"]`);
+            const dia = document.querySelector(`#persona${i} #nacimientoDiv select[name="dia"]`);
+            const mes = document.querySelector(`#persona${i} #nacimientoDiv select[name="mes"]`);
+            const anio = document.querySelector(`#persona${i} #nacimientoDiv select[name="anio"]`);
+    
+            persona.nombre = nombre.value;
+            persona.apellidos = apellidos.value;
+            persona.fechaNacimiento = {
+                dia: dia.value,
+                mes: mes.value,
+                anio: anio.value
+            };
+        }
+
+        guardarLocal(`persona${i}`, JSON.stringify(persona));
+    };
+
 }
 
 function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arrayPais, arrayContacto) {
@@ -168,15 +224,19 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     const frase = document.createElement('h2');
     frase.innerText = '¡Comenzá tu trámite con nosotros!';
 
-    frase.style.color = '#00274D';
-
     const divFormulario = document.createElement('div');
     divFormulario.id = 'formulario';
 
+    const persona1 = document.createElement('div');
+    persona1.id = 'persona1';
+
     // estilos del formulario
 
+    frase.style.color = '#00274D';
     divFormulario.style.display = 'grid';
     divFormulario.style.gap = '1rem';
+    persona1.style.display = 'grid';
+    persona1.style.gap = '.5rem';
 
     const divInicio = crearCampos(arrayInicio);
     divInicio.id = 'inicioDiv'
@@ -199,14 +259,15 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
 
     divFormulario.appendChild(divInicio);
     divFormulario.appendChild(h3);
-    divFormulario.appendChild(divNombreForm);
-    divFormulario.appendChild(divNacimientoForm);
-    divFormulario.appendChild(divPaisForm);
-    divFormulario.appendChild(divContactoForm);
+    persona1.appendChild(divNombreForm);
+    persona1.appendChild(divNacimientoForm);
+    persona1.appendChild(divPaisForm);
+    persona1.appendChild(divContactoForm);
+    divFormulario.appendChild(persona1);
 
     // llamo a los campos repetidos
 
-    const divCamposRepetidos = crearCamposRepetidos(arrayNombre, arrayNacimiento, arrayContacto);
+    const divCamposRepetidos = crearCamposRepetidos(arrayNombre, arrayNacimiento);
     divFormulario.appendChild(divCamposRepetidos);
 
     // boton enviar
@@ -251,18 +312,13 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
             color: "#494f5d",
         }).then((result) => {
             if (result.isConfirmed) {
+                guardarDatosFormulario();
                 Swal.fire({
                     title: "Su información ha sido enviada",
                     text: "Pronto nos estaremos comunicando con usted.",
                     icon: "succes",
                     confirmButtonText: "Finalizar",
                     color: "#494f5d",
-                });
-            } else if (result.isDenied) {
-                Swal.fire({
-                    title: "Los cambios no han sido guardados",
-                    icon: "error",
-                    color: '#494f5d'
                 });
             }
         });
