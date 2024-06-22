@@ -113,7 +113,7 @@ function crearCampos(arrayElementos) {
             option.textContent = opcion;
             input.appendChild(option);
         });
-        
+
         div.appendChild(label);
         div.appendChild(input);
     });
@@ -259,13 +259,14 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
                     color: "#494f5d",
                 });
             } else if (result.isDenied) {
-            Swal.fire({
-                title:"Los cambios no han sido guardados",
-                icon: "error",
-                color: '#494f5d'
-            });
+                Swal.fire({
+                    title: "Los cambios no han sido guardados",
+                    icon: "error",
+                    color: '#494f5d'
+                });
             }
-        });    }
+        });
+    }
 
     // agregar nodos hijos
 
@@ -273,7 +274,7 @@ function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arr
     formContainer.appendChild(frase);
     formContainer.appendChild(divFormulario);
 
-    // agrego eventos del dom aca tambien porque sino no actualiza
+    // agrego eventos del dom aca tambien porque sino no actualiza los campos del form
 
     const selectDestinosForm = document.getElementById('destinos');
     const selectNroTramitesForm = document.getElementById('nroTramites');

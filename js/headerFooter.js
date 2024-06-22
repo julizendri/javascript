@@ -50,14 +50,6 @@ function crearDropdown(array, contenedor, getText) {
     });
 }
 
-// reset y letra
-
-const style = document.createElement('style');
-style.innerHTML = `
-
-`;
-document.head.appendChild(style);
-
 // HEADER
 // declaracion de variables para el header
 

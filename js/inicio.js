@@ -142,7 +142,6 @@ botonEmpezar.onclick = () => {
     divImagen.style.height = divEmpezarPresente ? '65vh' : '75vh';
     dentroImagen.style.marginTop = divEmpezarPresente ? '75px' : '2px';
 
-
     const selects = document.querySelectorAll('select');
     selects.forEach((select, index) => {
         select.style.gridColumn = `${index + 1}`;
