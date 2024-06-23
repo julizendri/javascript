@@ -13,7 +13,6 @@ divImagen.innerHTML = `
 const divInicio = document.createElement('div');
 divInicio.innerHTML = `
     <div id="paises"></div>
-    <div id="opiniones"></div>
 `;
 
 // agrego nodos hijos
@@ -80,15 +79,20 @@ divEmpezar.id = 'divEmpezar';
 
 const labelDestinos = document.createElement('label');
 labelDestinos.innerText = '¿A que destino desea viajar?';
+labelDestinos.id = 'labelDestinos';
 const selectDestinos = document.createElement('select');
 selectDestinos.innerHTML = '<option>Elija una opción</option>';
+selectDestinos.id = 'selectDestinos';
 const labelNroTramites = document.createElement('label');
 labelNroTramites.innerText = '¿Cuántos trámites desea realizar?';
+labelNroTramites.id = 'labelNroTramites';
 const selectNroTramites = document.createElement('select');
 selectNroTramites.innerHTML = '<option>Elija una opción</option>';
+selectNroTramites.id = 'selectNroTramites';
 const botonSiguiente = document.createElement('button');
 botonSiguiente.type = 'submit';
 botonSiguiente.innerText = 'Siguiente';
+botonSiguiente.id = 'siguiente';
 
 crearDropdown(paises, selectDestinos, item => item.nombre);
 crearDropdown([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], selectNroTramites, item => item);
@@ -210,6 +214,7 @@ const divPaises = document.getElementById('paises');
 
 paises.forEach(pais => {
     const li = document.createElement('li');
+    li.id = `${toCamelCase(pais.nombre)}Li`;
     const a = document.createElement('a');
     a.href = `visas.html#${toCamelCase(pais.nombre)}`;
     const h4 = document.createElement('h4');

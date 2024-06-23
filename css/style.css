@@ -36,7 +36,7 @@ null {
     color: white !important;
 }
 
-.swal2-styled.swal2-confirm:hover{
+.swal2-styled.swal2-confirm:hover {
     background-color: #0b3495 !important;
     color: white !important;
 }
@@ -49,4 +49,58 @@ null {
 .swal2-styled.swal2-deny:hover {
     background-color: #d20f29 !important;
     color: white !important;
+}
+
+@media (max-width: 650px) {
+    /* responsiveness para media */
+    /* inicio */
+
+    #divEmpezar{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5,1fr);
+    }
+
+    #labelDestinos{
+        grid-column: 1/ span 2;
+        grid-row: 1;
+    }
+
+    #selectDestinos{
+        grid-column: 1/ span 2;
+        grid-row: 2;
+    }
+
+    #labelNroTramites{
+        grid-column: 1/ span 2;
+        grid-row: 3;
+    }
+
+    #selectNroTramites{
+        grid-column: 1/ span 2;
+        grid-row: 4;
+    }
+
+    #siguiente{
+        grid-column: 1/ span 2;
+        grid-row: 5;
+    }
+
+    #paises {
+        gap: 1rem;
+    }
+
+    #estadosUnidosLi {
+        grid-column: 1 / span 3;
+        grid-row: 1;
+    }
+
+    #australiaLi {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+    }
+
+    #canadaLi {
+        grid-column: 1 / span 3;
+        grid-row: 3;
+    }
 }

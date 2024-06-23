@@ -18,6 +18,7 @@ const paises = [
     },
 ];
 cuerpo.style.backgroundColor = '#f0f0f2';
+cuerpo.style.width = '100%';
 
 // funcion para convertir links en camelCase
 
