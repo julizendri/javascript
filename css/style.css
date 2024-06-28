@@ -55,36 +55,6 @@ null {
     /* responsiveness para media */
     /* inicio */
 
-    #divEmpezar{
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5,1fr);
-    }
-
-    #labelDestinos{
-        grid-column: 1/ span 2;
-        grid-row: 1;
-    }
-
-    #selectDestinos{
-        grid-column: 1/ span 2;
-        grid-row: 2;
-    }
-
-    #labelNroTramites{
-        grid-column: 1/ span 2;
-        grid-row: 3;
-    }
-
-    #selectNroTramites{
-        grid-column: 1/ span 2;
-        grid-row: 4;
-    }
-
-    #siguiente{
-        grid-column: 1/ span 2;
-        grid-row: 5;
-    }
-
     #paises {
         gap: 1rem;
     }

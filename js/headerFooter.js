@@ -188,10 +188,12 @@ linkVisas.appendChild(dropdown);
 linkVisas.onmouseover = () => {
     dropdown.style.display = 'block';
     linkVisas.style.textShadow = '0 0 3px #7692bf';
+    dropdown.style.boxShadow = '0 0 5px #0000004d';
 }
 linkVisas.onmouseout = () => {
     dropdown.style.display = 'none';
     linkVisas.style.textShadow = 'initial';
+    dropdown.style.boxShadow = 'none';
 }
 
 // MAIN
@@ -232,7 +234,7 @@ parrafoFooter.innerText = `Hago tu visa - ${anio} - Todos los derechos reservado
 
 const indexLinks = ['Empezar', 'Paises'];
 const visasLinks = ['Estados Unidos', 'Australia', 'Canadá'];
-const contactoLinks = ['Sobre Nosotros', 'Contacto'];
+const contactoLinks = ['Sobre nosotros', 'Contacto'];
 
 // for each para los socials
 
