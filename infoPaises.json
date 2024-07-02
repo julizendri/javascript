@@ -1,0 +1,20 @@
+[
+    {
+        "nombre": "Estados Unidos",
+        "descripcion": "Famoso por su diversidad cultural y poder económico, alberga ciudades icónicas como Nueva York y maravillas naturales como el Gran Cañón.",
+        "url": "usa.jpg",
+        "parrafo": "Muchas cosas de EEUU"
+    },
+    {
+        "nombre": "Australia",
+        "descripcion": "Conocido por su biodiversidad única y playas impresionantes, ofrece ciudades vibrantes como Sídney y Melbourne, además de aventuras al aire libre.",
+        "url": "aus.jpg",
+        "parrafo": "Muchas cosas de Australia"
+    },
+    {
+        "nombre": "Canadá",
+        "descripcion": "Situado en el norte de América, se distingue por sus paisajes naturales, ciudades cosmopolitas como Toronto y Vancouver, y su bilingüismo.",
+        "url": "can.jpg",
+        "parrafo": "Muchas cosas de Canadá"
+    }
+]

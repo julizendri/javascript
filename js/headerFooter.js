@@ -1,22 +1,6 @@
 // General
 const cuerpo = document.body;
-const paises = [
-    {
-        nombre: 'Estados Unidos',
-        descripcion: 'Famoso por su diversidad cultural y poder económico, alberga ciudades icónicas como Nueva York y maravillas naturales como el Gran Cañón.',
-        url: 'usa.jpg'
-    },
-    {
-        nombre: 'Australia',
-        descripcion: 'Conocido por su biodiversidad única y playas impresionantes, ofrece ciudades vibrantes como Sídney y Melbourne, además de aventuras al aire libre.',
-        url: 'aus.jpg'
-    },
-    {
-        nombre: 'Canadá',
-        descripcion: 'Situado en el norte de América, se distingue por sus paisajes naturales, ciudades cosmopolitas como Toronto y Vancouver, y su bilingüismo.',
-        url: 'can.jpg'
-    },
-];
+
 cuerpo.style.backgroundColor = '#f0f0f2';
 cuerpo.style.width = '100%';
 
@@ -33,7 +17,14 @@ function toCamelCase(string) {
 // funcion guardar y sacar de local storage
 
 function guardarLocal(clave, valor) {
-    localStorage.setItem(clave, valor);
+    return new Promise((resolve, reject) => {
+        try {
+            localStorage.setItem(clave, valor);
+            resolve();
+        } catch (error) {
+            reject(error);
+        }
+    });
 }
 
 function sacarLocal(clave) {
@@ -55,19 +46,19 @@ function crearDropdown(array, contenedor, getText) {
 // declaracion de variables para el header
 
 const header = document.querySelector("header");
+
 const navegador = document.createElement('div');
 const nav = document.createElement('nav');
 const ulPages = document.createElement('ul');
-const ancla = document.createElement('a');
-const links = ["Index", "Visas", "Nosotros"];
 const ulLogo = document.createElement('ul');
+const links = ["Index", "Visas", "Nosotros"];
 const liLogo = document.createElement('li');
+const ancla = document.createElement('a');
 const imgLogo = document.createElement('img');
 
 //agrego la imagen logo
 
 ancla.href = 'index.html';
-ancla.appendChild(imgLogo);
 imgLogo.src = 'img/logoBlanco.png';
 imgLogo.alt = 'Hago tu visa';
 
@@ -80,7 +71,7 @@ links.forEach(link => {
     a.href = `${link.toLowerCase()}.html`;
     a.innerText = `${link}`;
     a.id = `id${link}`;
-    
+
     li.appendChild(a);
     ulPages.appendChild(li);
 
@@ -106,6 +97,7 @@ nav.appendChild(ulLogo);
 nav.appendChild(ulPages);
 liLogo.appendChild(ancla);
 ulLogo.appendChild(liLogo);
+ancla.appendChild(imgLogo);
 
 // estilos header
 
@@ -151,35 +143,42 @@ dropdown.style.width = '450%';
 dropdown.style.borderRadius = '3px';
 dropdown.style.backgroundColor = '#7692bf';
 
-// foer each para los paises
+// for each para los paises
 
-paises.forEach(pais=>{
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = `visas.html#${toCamelCase(pais.nombre)}`;
-    a.innerText = `${pais.nombre}`;
+fetch('/infoPaises.json')
+    .then((res) => res.json())
+    .then((data) => {
 
-    // estilos
+        data.forEach((pais) => {
+            const li = document.createElement('li')
+            const a = document.createElement('a');
+            a.href = `visas.html#${toCamelCase(pais.nombre)}`;
+            a.innerText = `${pais.nombre}`;
 
-    li.style.margin = '.5rem';
+            // estilos
 
-    a.style.padding = '.5rem';
-    a.style.textShadow = '0 0 3px #01194f';
+            li.style.margin = '.5rem';
 
-    // eventos
+            a.style.padding = '.5rem';
+            a.style.textShadow = '0 0 3px #01194f';
+            a.style.color = 'white';
 
-    a.onmouseover = () => {
-        a.style.textShadow = '0 0 3px red';
-    };
-    a.onmouseout = () => {
-        a.style.textShadow = 'initial';
-    };
+            // eventos
 
-    // agrego nodos hijos
+            a.onmouseover = () => {
+                a.style.textShadow = '0 0 3px red';
+            };
+            a.onmouseout = () => {
+                a.style.textShadow = 'initial';
+            };
 
-    li.appendChild(a);
-    dropdown.appendChild(li);
-})
+            // agrego nodos hijos
+
+            li.appendChild(a);
+            dropdown.appendChild(li);
+
+        })
+    })
 
 linkVisas.appendChild(dropdown);
 

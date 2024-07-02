@@ -94,7 +94,7 @@ botonSiguiente.type = 'submit';
 botonSiguiente.innerText = 'Siguiente';
 botonSiguiente.id = 'siguiente';
 
-crearDropdown(paises, selectDestinos, item => item.nombre);
+crearDropdown(['Estados Unidos', 'Australia', 'Canadá'], selectDestinos, item => item);
 crearDropdown([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], selectNroTramites, item => item);
 
 // guardar en local storage
@@ -176,7 +176,7 @@ botonSiguiente.onmouseover = () => {
 botonSiguiente.onmouseout = () => {
     botonSiguiente.style.transform = 'initial';
     botonSiguiente.style.color = 'initial';
-    botonSiguiente.style.backgroundColor= 'white';
+    botonSiguiente.style.backgroundColor = 'white';
 }
 
 botonSiguiente.onclick = () => {
@@ -212,85 +212,90 @@ const divPaises = document.getElementById('paises');
 
 // for each para los divs de paises
 
-paises.forEach(pais => {
-    const li = document.createElement('li');
-    li.id = `${toCamelCase(pais.nombre)}Li`;
-    const a = document.createElement('a');
-    a.href = `visas.html#${toCamelCase(pais.nombre)}`;
-    const h4 = document.createElement('h4');
-    h4.innerText = `${pais.nombre}`;
-    const p = document.createElement('p');
-    p.innerText = `${pais.descripcion}`;
-    const boton = document.createElement('button');
-    boton.textContent = 'Saber Más';
-    boton.type = 'button';
-    boton.id = 'botonSaberMas';
-
-    boton.style.width = 'fit-content';
-    boton.style.padding = '.5rem';
-    boton.style.margin = ' 0 1rem 1rem 1rem';
-    boton.style.backgroundColor = '#d20f29';
-    boton.style.border = 'none';
-    boton.style.borderRadius = '3px';
-    boton.style.color = 'white';
-    boton.style.fontSize = '.8rem';
-    boton.style.justify = 'right';
-    boton.style.transition = 'all 150ms ease';
-    boton.style.boxShadow = '0 0 3px #d8d8dd';
-
-    p.style.padding = '0 1rem';
-    p.style.fontSize = '1rem';
-    p.style.color = '#494f5d';
-
-    a.style.display = 'flex';
-    a.style.justifyContent = 'center';
-    a.style.alignItems = 'center';
-    a.style.padding = '6rem';
-    a.style.background = `url(./img/${toCamelCase(pais.nombre)}.jpg) no-repeat center center`;
-    a.style.backgroundSize = 'cover';
-    a.style.width = '100%';
-    a.style.maxHeight = '100px';
-
-    h4.style.color = 'white';
-    h4.style.textShadow = '0 0 5px black';
-    h4.style.textAlign = 'center';
-
-    li.style.display = 'flex';
-    li.style.flexDirection = 'column';
-    li.style.width = '100%';
-    li.style.gap = '1rem';
-    li.style.border = 'none';
-    li.style.borderRadius = '5px';
-    li.style.backgroundColor = '#f0f0f2';
-    li.style.overflow = 'hidden';
-    li.style.boxShadow = '0 0 5px #d8d8dd';
-    li.style.transition = 'all 150ms ease';
+fetch('/infoPaises.json')
+    .then((res) => res.json())
+    .then((data) => {
+        data.forEach((pais) => {
+            const li = document.createElement('li');
+            li.id = `${toCamelCase(pais.nombre)}Li`;
+            const a = document.createElement('a');
+            a.href = `visas.html#${toCamelCase(pais.nombre)}`;
+            const h4 = document.createElement('h4');
+            h4.innerText = `${pais.nombre}`;
+            const p = document.createElement('p');
+            p.innerText = `${pais.descripcion}`;
+            const boton = document.createElement('button');
+            boton.textContent = 'Saber Más';
+            boton.type = 'button';
+            boton.id = 'botonSaberMas';
 
 
-    li.onmouseover = () => {
-        li.style.transform = 'scale(1.05)';
-        boton.onmouseover = () => {
-            boton.style.transform = 'scale(1.1)';
-            boton.style.backgroundColor = '#970017';
-            boton.style.cursor = 'pointer';
-        }
-    }
-    li.onmouseout = () => {
-        boton.style.transform = 'scale(1)';
-        boton.style.backgroundColor = '#d20f29';
-        li.style.transform = 'initial';
-    }
+            boton.style.width = 'fit-content';
+            boton.style.padding = '.5rem';
+            boton.style.margin = ' 0 1rem 1rem 1rem';
+            boton.style.backgroundColor = '#d20f29';
+            boton.style.border = 'none';
+            boton.style.borderRadius = '3px';
+            boton.style.color = 'white';
+            boton.style.fontSize = '.8rem';
+            boton.style.justify = 'right';
+            boton.style.transition = 'all 150ms ease';
+            boton.style.boxShadow = '0 0 3px #d8d8dd';
 
-    boton.onclick = () => {
-        window.location.href = `visas.html#${toCamelCase(pais.nombre)}`;
-    }
+            p.style.padding = '0 1rem';
+            p.style.fontSize = '1rem';
+            p.style.color = '#494f5d';
 
-    a.appendChild(h4);
-    li.appendChild(a);
-    li.appendChild(p);
-    li.appendChild(boton);
-    divPaises.appendChild(li);
-})
+            a.style.display = 'flex';
+            a.style.justifyContent = 'center';
+            a.style.alignItems = 'center';
+            a.style.padding = '6rem';
+            a.style.background = `url(./img/${toCamelCase(pais.nombre)}.jpg) no-repeat center center`;
+            a.style.backgroundSize = 'cover';
+            a.style.width = '100%';
+            a.style.maxHeight = '100px';
+
+            h4.style.color = 'white';
+            h4.style.textShadow = '0 0 5px black';
+            h4.style.textAlign = 'center';
+
+            li.style.display = 'flex';
+            li.style.flexDirection = 'column';
+            li.style.width = '100%';
+            li.style.gap = '1rem';
+            li.style.border = 'none';
+            li.style.borderRadius = '5px';
+            li.style.backgroundColor = '#f0f0f2';
+            li.style.overflow = 'hidden';
+            li.style.boxShadow = '0 0 5px #d8d8dd';
+            li.style.transition = 'all 150ms ease';
+
+
+            li.onmouseover = () => {
+                li.style.transform = 'scale(1.05)';
+                boton.onmouseover = () => {
+                    boton.style.transform = 'scale(1.1)';
+                    boton.style.backgroundColor = '#970017';
+                    boton.style.cursor = 'pointer';
+                }
+            }
+            li.onmouseout = () => {
+                boton.style.transform = 'scale(1)';
+                boton.style.backgroundColor = '#d20f29';
+                li.style.transform = 'initial';
+            }
+
+            boton.onclick = () => {
+                window.location.href = `visas.html#${toCamelCase(pais.nombre)}`;
+            }
+
+            a.appendChild(h4);
+            li.appendChild(a);
+            li.appendChild(p);
+            li.appendChild(boton);
+            divPaises.appendChild(li);
+        })
+    })
 
 // arreglo los tamaños de las imagenes
 

@@ -163,9 +163,11 @@ function crearCamposRepetidos(arrayNombre, arrayNacimiento,) {
 
 // funcion storage
 
-function guardarDatosFormulario() {
+async function guardarDatosFormulario() {
+    const datosFormulario = [];
 
     const nroTramites = parseInt(localStorage.getItem('nroTramitesSeleccionado'), 10) || 1;
+    const destinoSeleccionado = localStorage.getItem('destinoSeleccionado') || '';
 
     for (i = 1; i <= nroTramites; i++) {
         const persona = {};
@@ -175,7 +177,7 @@ function guardarDatosFormulario() {
             const apellidos = document.querySelector(`#persona${i} #nombreDiv input[name="apellidos"]`);
             const dia = document.querySelector(`#persona${i} #nacimientoDiv select[name="dia"]`);
             const mes = document.querySelector(`#persona${i} #nacimientoDiv select[name="mes"]`);
-            const anio = document.querySelector(`#persona${i} #nacimientoDiv select[name="anio"]`);    
+            const anio = document.querySelector(`#persona${i} #nacimientoDiv select[name="anio"]`);
             const pais = document.querySelector(`#persona${i} #paisDiv input[name="pais"]`);
             const provincia = document.querySelector(`#persona${i} #paisDiv input[name="provincia"]`);
             const ciudad = document.querySelector(`#persona${i} #paisDiv input[name="ciudad"]`);
@@ -196,6 +198,7 @@ function guardarDatosFormulario() {
             persona.codigoPostal = codigoPostal.value;
             persona.telefono = telefono.value;
             persona.email = email.value;
+            persona.destino = destinoSeleccionado;
 
         } else {
             const nombre = document.querySelector(`#persona${i} #nombre input[name="nombre"]`);
@@ -203,7 +206,7 @@ function guardarDatosFormulario() {
             const dia = document.querySelector(`#persona${i} #nacimientoDiv select[name="dia"]`);
             const mes = document.querySelector(`#persona${i} #nacimientoDiv select[name="mes"]`);
             const anio = document.querySelector(`#persona${i} #nacimientoDiv select[name="anio"]`);
-    
+
             persona.nombre = nombre.value;
             persona.apellidos = apellidos.value;
             persona.fechaNacimiento = {
@@ -213,9 +216,9 @@ function guardarDatosFormulario() {
             };
         }
 
-        guardarLocal(`persona${i}`, JSON.stringify(persona));
+        datosFormulario.push(persona);
+        await guardarLocal(`Datos del formulario`, JSON.stringify(datosFormulario));
     };
-
 }
 
 function crearForm(formContainer, arrayInicio, arrayNombre, arrayNacimiento, arrayPais, arrayContacto) {
@@ -410,7 +413,7 @@ function crearElemento(label, tipo, name, options) {
 }
 
 const arrayInicio = [
-    crearElemento('Destinos', 'select', 'destinos', paises.map(pais => pais.nombre)),
+    crearElemento('Destinos', 'select', 'destinos', visasLinks),
     crearElemento('Número de trámites', 'select', 'nroTramites', Array.from({ length: 10 }, (_, i) => i + 1)),
 ];
 
