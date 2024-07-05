@@ -6,7 +6,7 @@ titulo.innerText = 'Visas';
 const requisitos = document.createElement('h3');
 requisitos.innerText = 'Requisitos Generales:';
 const listaRequisitos = document.createElement('p');
-listaRequisitos.innerText = `- Pasaporte válido.\n- Prueba de fondos suficientes.\n- Pruebas de vínculo con el paise de orígen.`;
+listaRequisitos.innerText = `- Pasaporte válido.\n- Prueba de fondos suficientes.\n- Pruebas de vínculo con el país de orígen.`;
 
 cajaVisa.appendChild(titulo);
 cajaVisa.appendChild(requisitos);

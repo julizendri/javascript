@@ -169,7 +169,7 @@ fetch('/infoPaises.json')
                 a.style.textShadow = '0 0 3px red';
             };
             a.onmouseout = () => {
-                a.style.textShadow = 'initial';
+                a.style.textShadow = '0 0 3px #01194f';
             };
 
             // agrego nodos hijos
