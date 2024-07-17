@@ -18,7 +18,7 @@ main.appendChild(cajaVisa);
 
 // for each para paises
 
-fetch('/infoPaises.json')
+fetch('infoPaises.json')
     .then((res) => res.json())
     .then((data) => {
         data.forEach((pais => {

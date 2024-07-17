@@ -212,7 +212,7 @@ const divPaises = document.getElementById('paises');
 
 // for each para los divs de paises
 
-fetch('/infoPaises.json')
+fetch('infoPaises.json')
     .then((res) => res.json())
     .then((data) => {
         data.forEach((pais) => {

@@ -145,7 +145,7 @@ dropdown.style.backgroundColor = '#7692bf';
 
 // for each para los paises
 
-fetch('/infoPaises.json')
+fetch('infoPaises.json')
     .then((res) => res.json())
     .then((data) => {
 
